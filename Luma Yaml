@@ -1,0 +1,334 @@
+openapi: 3.1.0
+info:
+  title: Dream Machine API
+  version: 1.0.0
+  description: API for generating videos with various effects and options from textual prompts or images.
+servers:
+  - url: https://api.lumalabs.ai/dream-machine/v1
+paths:
+  /generations:
+    post:
+      summary: Generate a video from a text prompt
+      operationId: generateVideo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+                  description: The description of the scene to generate.
+                  example: "A futuristic cityscape at sunset with flying cars."
+                aspect_ratio:
+                  type: string
+                  description: The aspect ratio of the video (e.g., "16:9").
+                  example: "16:9"
+                loop:
+                  type: boolean
+                  description: Whether the video should loop continuously.
+                  example: true
+                duration:
+                  type: string
+                  description: The duration of the video.
+                  enum: [5s, 9s]
+                  example: "5s"
+                resolution:
+                  type: string
+                  description: The resolution of the video.
+                  enum: [540p, 720p]
+                  example: "720p"
+                model:
+                  type: string
+                  description: The model used for video generation.
+                  enum: [ray-2, ray-1-6]
+                  example: "ray-2"
+                keyframes:
+                  type: object
+                  description: Keyframes for the video generation.
+                  properties:
+                    frame0:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          description: The type of keyframe (e.g., "image").
+                          example: "image"
+                        url:
+                          type: string
+                          description: The URL of the keyframe image.
+                          example: "https://example.com/image.jpg"
+                callback_url:
+                  type: string
+                  description: A URL for receiving status updates and video completion notifications.
+                  example: "https://your-callback-url.com/endpoint"
+      responses:
+        '200':
+          description: Successfully generated the video.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The ID of the generated video.
+                  state:
+                    type: string
+                    description: The current state of the generation (e.g., "processing", "completed").
+                  assets:
+                    type: object
+                    properties:
+                      video:
+                        type: string
+                        description: The URL of the generated video.
+        '400':
+          description: Bad Request - Invalid input parameters.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    description: Specific error code for troubleshooting.
+                  message:
+                    type: string
+                    description: Error message describing what went wrong.
+        '500':
+          description: Internal Server Error.
+    get:
+      summary: List all video generations
+      operationId: listGenerations
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 10
+            minimum: 1
+            maximum: 100
+          description: The number of generations to return.
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+            description: The offset for pagination.
+      responses:
+        '200':
+          description: A list of generations.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_count:
+                    type: integer
+                    description: The total number of generations available.
+                  generations:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: The ID of the generation.
+                        state:
+                          type: string
+                          description: The current state of the generation.
+                        created_at:
+                          type: string
+                          format: date-time
+                          description: The creation time of the generation.
+        '500':
+          description: Internal Server Error.
+  /generations/{generationId}:
+    get:
+      summary: Get the status of a specific generation
+      operationId: getGenerationStatus
+      parameters:
+        - in: path
+          name: generationId
+          required: true
+          schema:
+            type: string
+          description: The ID of the generation to retrieve.
+      responses:
+        '200':
+          description: The status of the generation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The ID of the generation.
+                  state:
+                    type: string
+                    description: The current state of the generation.
+                  assets:
+                    type: object
+                    properties:
+                      video:
+                        type: string
+                        description: The URL of the generated video.
+        '404':
+          description: Generation not found.
+        '500':
+          description: Internal Server Error.
+    delete:
+      summary: Delete a specific generation
+      operationId: deleteGeneration
+      parameters:
+        - in: path
+          name: generationId
+          required: true
+          schema:
+            type: string
+          description: The ID of the generation to delete.
+      responses:
+        '204':
+          description: Generation deleted successfully.
+        '404':
+          description: Generation not found.
+        '500':
+          description: Internal Server Error.
+  /generations/{generationId}/extend:
+    post:
+      summary: Extend a video generation with additional frames
+      operationId: extendVideo
+      parameters:
+        - in: path
+          name: generationId
+          required: true
+          schema:
+            type: string
+          description: The ID of the generation to extend.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                additional_frames:
+                  type: integer
+                  description: Number of frames to extend the video by.
+                  example: 100
+      responses:
+        '200':
+          description: Video extended successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The ID of the extended generation.
+                  state:
+                    type: string
+                    description: The current state of the generation.
+        '404':
+          description: Generation not found.
+        '500':
+          description: Internal Server Error.
+  /generations/{generationId}/reverse_extend:
+    post:
+      summary: Reverse extend a video by adding frames before the starting point
+      operationId: reverseExtendVideo
+      parameters:
+        - in: path
+          name: generationId
+          required: true
+          schema:
+            type: string
+          description: The ID of the generation to reverse extend.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                frames_before_start:
+                  type: integer
+                  description: Number of frames to add before the video's starting point.
+                  example: 50
+      responses:
+        '200':
+          description: Video reverse extended successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The ID of the reverse extended generation.
+                  state:
+                    type: string
+                    description: The current state of the generation.
+        '404':
+          description: Generation not found.
+        '500':
+          description: Internal Server Error.
+  /generations/{generationId}/interpolate:
+    post:
+      summary: Interpolate frames within a video for smoother transitions
+      operationId: interpolateFrames
+      parameters:
+        - in: path
+          name: generationId
+          required: true
+          schema:
+            type: string
+          description: The ID of the generation to interpolate.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                frame_count:
+                  type: integer
+                  description: Number of frames to generate between existing frames for smoother transitions.
+                  example: 10
+      responses:
+        '200':
+          description: Frames interpolated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The ID of the interpolated generation.
+                  state:
+                    type: string
+                    description: The current state of the generation.
+        '404':
+          description: Generation not found.
+        '500':
+          description: Internal Server Error.
+  /generations/camera_motion/list:
+    get:
+      summary: Get all supported camera motions
+      operationId: listCameraMotions
+      responses:
+        '200':
+          description: A list of supported camera motions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  example: "orbit_left"
+        '500':
+          description: Internal Server Error.
