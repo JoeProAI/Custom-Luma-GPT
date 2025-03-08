@@ -1,0 +1,138 @@
+# AI Video Generation and Shot Planning Guide
+
+## Planning Your Video Generation
+
+Before generating any video content, consider these key elements:
+- Scene objective and emotional impact
+- Required camera movements and transitions
+- Lighting conditions and mood
+- Duration and pacing
+- Subject positioning and framing
+
+## Fundamental Camera Shots for AI Generation
+
+### Basic Shot Types
+When describing shots for AI generation, be specific about:
+
+**Close-Up (CU)**
+- Describe exact framing of subject's face/details
+- Specify emotional expression and lighting
+- Include any subtle movements or focus shifts
+Example: "Generate a close-up shot of the subject's face, lit from the left side, with soft golden hour lighting, focusing on their contemplative expression"
+
+**Medium Shot**
+- Define subject positioning (waist up)
+- Include environmental context
+- Specify subject movement and interaction
+Example: "Create a medium shot of the character at their desk, framed from waist up, with warm office lighting and natural hand gestures while typing"
+
+**Wide Shot**
+- Detail all elements in the scene
+- Describe depth and spatial relationships
+- Include atmospheric elements
+Example: "Generate a wide shot of a bustling city street at dusk, with neon signs reflecting off wet pavement, pedestrians with umbrellas moving in both directions"
+
+### Advanced Shot Generation
+
+**Dutch Angle**
+- Specify exact tilt degree
+- Describe intended psychological effect
+- Include movement progression
+Example: "Create a 15-degree dutch angle shot, slowly tilting further to 25 degrees as tension builds, maintaining focus on the subject's increasingly anxious expression"
+
+**POV (Point of View)**
+- Detail the perspective character's movement
+- Include interaction with environment
+- Describe camera shake or stabilization
+Example: "Generate a POV shot from the runner's perspective, with slight camera bounce matching footsteps, passing trees and benches in a park setting"
+
+## Camera Movements for Video Generation
+
+### Basic Movement Instructions
+
+**Pan**
+- Specify start and end points
+- Define speed and smoothness
+- Include subject tracking details
+Example: "Create a smooth pan from left to right across the cityscape, moving at a steady pace over 5 seconds, maintaining focus on the horizon line"
+
+**Dolly**
+- Describe track movement path
+- Detail foreground/background elements
+- Specify distance and timing
+Example: "Generate a dolly shot moving forward through the restaurant, passing between tables, maintaining focus on the couple at the far table"
+
+### Advanced Movement Generation
+
+**Crane Shot**
+- Define full movement arc
+- Include height changes
+- Specify timing and reveal elements
+Example: "Create a crane shot starting at ground level, rising smoothly to 30 feet while rotating 180 degrees to reveal the mountain vista"
+
+## Special Visual Effects and Styles
+
+### Lighting Instructions
+- Describe light sources and intensity
+- Specify color temperature
+- Include shadow placement
+Example: "Generate the scene with dramatic chiaroscuro lighting, strong contrast between light and shadow, main light source from above right casting long shadows"
+
+### Visual Enhancement
+- Define color grading style
+- Specify atmosphere and mood
+- Include any special effects
+Example: "Create the shot with a cool, desaturated color grade, light fog in the background, and subtle lens flare from the street lights"
+
+## Best Practices for AI Video Generation
+
+### Scene Planning
+1. Break down complex shots into clear components
+2. Describe transitions between generated segments
+3. Maintain consistency in style and lighting
+4. Consider processing limitations and optimize accordingly
+
+### Quality Control
+- Review generated segments for continuity
+- Check lighting consistency across scenes
+- Verify movement smoothness
+- Ensure stable focus and framing
+
+### Common Generation Combinations
+Describe complex shots with clear, sequential instructions:
+Example: "Generate a sequence starting with a crane shot rising above the crowd, transitioning to a tracking shot following the subject, ending with a dramatic push-in to close-up"
+
+## Advanced Applications
+
+### Scene Transitions
+- Describe precise transition timing
+- Include matching elements between shots
+- Specify transition effects and duration
+
+### Special Situations
+
+**Action Sequences**
+- Break down into individual movements
+- Specify camera shake and stabilization
+- Include impact moments and reactions
+
+**Dialogue Scenes**
+- Detail speaker framing
+- Include listening reactions
+- Specify timing and pacing
+
+## Technical Specifications
+
+### Quality Parameters
+- Resolution: Specify required output quality
+- Frame Rate: Define smooth motion requirements
+- Stability: Describe required smoothness
+- Color: Detail grading and correction needs
+
+### Duration Guidelines
+- Quick Cuts: 1-2 seconds
+- Standard Shots: 3-5 seconds 
+- Establishing Shots: 5-7 seconds
+- Complex Movements: As needed for completion
+
+Remember to provide clear, detailed descriptions for each shot you want to generate, focusing on both technical aspects and emotional impact.
